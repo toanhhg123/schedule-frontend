@@ -46,11 +46,11 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint --fix",
+      "npm run validate",
       "prettier --write"
     ],
     "*.tsx": [
-      "eslint --fix",
+      "npm run validate",
       "prettier --write"
     ]
   }
