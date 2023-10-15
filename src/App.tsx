@@ -1,7 +1,7 @@
-import React from 'react'
+import { Button } from 'antd'
 
 const App = () => {
-  return <div>Hello word</div>
+  return <Button>Hello word</Button>
 }
 
 export default App
