@@ -1,7 +1,5 @@
-import { Button } from 'antd'
-
 const App = () => {
-  return <Button className=''>Hello word</Button>
+  return <div>App</div>
 }
 
 export default App
