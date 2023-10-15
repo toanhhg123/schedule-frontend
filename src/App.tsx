@@ -1,5 +1,11 @@
+import DashBoard from './sections/DashBoard'
+
 const App = () => {
-  return <div>App</div>
+  return (
+    <>
+      <DashBoard />
+    </>
+  )
 }
 
 export default App
