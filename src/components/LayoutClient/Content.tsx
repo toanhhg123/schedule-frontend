@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
+  TeamOutlined,
   UserOutlined,
-  VideoCameraOutlined
+  FundOutlined,
+  CarryOutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
 } from '@ant-design/icons'
 import { Layout, Menu, Button, theme } from 'antd'
 
-const { Header, Sider, Content } = Layout
+interface Props {
+  content: ReactNode
+}
 
-const App: React.FC = () => {
+const Content = ({ content }: Props) => {
+  const { Header, Sider, Content } = Layout
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer }
@@ -18,17 +22,10 @@ const App: React.FC = () => {
 
   return (
     <Layout>
-      <Sider
-        style={{ top: 0, left: 0, borderRight: '1px solid rgba(5, 5, 5, 0.06)' }}
-        theme='light'
-        width={280}
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-      >
+      <Sider theme='dark' width={280} trigger={null} collapsible collapsed={collapsed}>
         <div className='demo-logo-vertical' />
         <Menu
-          theme='dark'
+          theme='light'
           mode='inline'
           defaultSelectedKeys={['1']}
           items={[
@@ -39,12 +36,17 @@ const App: React.FC = () => {
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
+              icon: <FundOutlined />,
               label: 'nav 2'
             },
             {
               key: '3',
-              icon: <UploadOutlined />,
+              icon: <CarryOutOutlined />,
+              label: 'nav 3'
+            },
+            {
+              key: '4',
+              icon: <TeamOutlined />,
               label: 'nav 3'
             }
           ]}
@@ -65,18 +67,17 @@ const App: React.FC = () => {
         </Header>
         <Content
           style={{
-            padding: 0,
-            margin: '16px 12px',
-            background: colorBgContainer,
-            overflow: 'initial',
-            minHeight: '100vh'
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer
           }}
         >
-          Content
+          {content}
         </Content>
       </Layout>
     </Layout>
   )
 }
 
-export default App
+export default Content
