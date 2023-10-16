@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Content = ({ content }: Props) => {
-  const { Header, Sider, Content } = Layout
+  const { Header, Sider } = Layout
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer }
@@ -23,7 +23,15 @@ const Content = ({ content }: Props) => {
   return (
     <Layout>
       <Sider
-        style={{ top: 0, left: 0, borderRight: '1px solid rgba(5, 5, 5, 0.06)' }}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          borderRight: '1px solid rgba(5, 5, 5, 0.06)'
+        }}
         theme='light'
         width={280}
         trigger={null}
@@ -38,29 +46,41 @@ const Content = ({ content }: Props) => {
           items={[
             {
               key: '1',
-              icon: <UserOutlined />,
-              label: 'nav 1'
+              icon: <FundOutlined />,
+              label: 'Dashboard'
             },
             {
               key: '2',
-              icon: <FundOutlined />,
-              label: 'nav 2'
+              icon: <UserOutlined />,
+              label: 'Information'
             },
             {
               key: '3',
               icon: <CarryOutOutlined />,
-              label: 'nav 3'
+              label: 'Task'
             },
             {
               key: '4',
               icon: <TeamOutlined />,
-              label: 'nav 3'
+              label: 'Team'
             }
           ]}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+            borderBottom: '1px solid rgba(5, 5, 5, 0.06)',
+            boxShadow: '0 .5px 6px 0 #ccc',
+            position: 'fixed',
+            top: 0,
+            left: collapsed ? 81 : 281,
+            width: '100%',
+            transition: '.1s all ease'
+          }}
+        >
           <Button
             type='text'
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -71,18 +91,9 @@ const Content = ({ content }: Props) => {
               height: 64
             }}
           />
+          Header
         </Header>
-        <Content
-          style={{
-            padding: 0,
-            margin: '16px 12px',
-            background: colorBgContainer,
-            overflow: 'initial',
-            minHeight: '100vh'
-          }}
-        >
-          {content}
-        </Content>
+        {content}
       </Layout>
     </Layout>
   )
