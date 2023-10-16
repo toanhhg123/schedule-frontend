@@ -1,20 +1,16 @@
-import { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import {
-  TeamOutlined,
-  UserOutlined,
-  FundOutlined,
-  CarryOutOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons'
 import { Layout, Menu, Button, theme } from 'antd'
 
-interface Props {
-  content: ReactNode
-}
+const { Header, Sider, Content } = Layout
 
-const Content = ({ content }: Props) => {
-  const { Header, Sider, Content } = Layout
+const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer }
@@ -32,7 +28,7 @@ const Content = ({ content }: Props) => {
       >
         <div className='demo-logo-vertical' />
         <Menu
-          theme='light'
+          theme='dark'
           mode='inline'
           defaultSelectedKeys={['1']}
           items={[
@@ -43,17 +39,12 @@ const Content = ({ content }: Props) => {
             },
             {
               key: '2',
-              icon: <FundOutlined />,
+              icon: <VideoCameraOutlined />,
               label: 'nav 2'
             },
             {
               key: '3',
-              icon: <CarryOutOutlined />,
-              label: 'nav 3'
-            },
-            {
-              key: '4',
-              icon: <TeamOutlined />,
+              icon: <UploadOutlined />,
               label: 'nav 3'
             }
           ]}
@@ -81,11 +72,11 @@ const Content = ({ content }: Props) => {
             minHeight: '100vh'
           }}
         >
-          {content}
+          Content
         </Content>
       </Layout>
     </Layout>
   )
 }
 
-export default Content
+export default App
