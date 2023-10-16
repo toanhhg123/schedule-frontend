@@ -1,9 +1,10 @@
-import DashBoard from './sections/DashBoard'
+import DashBoard from '@/pages/client/DashBoard'
+import Layout from '@/components/LayoutClient/Content'
 
 const App = () => {
   return (
     <>
-      <DashBoard />
+      <Layout content={<DashBoard />} />
     </>
   )
 }
