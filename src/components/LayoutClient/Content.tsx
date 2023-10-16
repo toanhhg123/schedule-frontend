@@ -22,7 +22,14 @@ const Content = ({ content }: Props) => {
 
   return (
     <Layout>
-      <Sider theme='dark' width={280} trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        style={{ top: 0, left: 0, borderRight: '1px solid rgba(5, 5, 5, 0.06)' }}
+        theme='light'
+        width={280}
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
         <div className='demo-logo-vertical' />
         <Menu
           theme='light'
@@ -67,10 +74,11 @@ const Content = ({ content }: Props) => {
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer
+            padding: 0,
+            margin: '16px 12px',
+            background: colorBgContainer,
+            overflow: 'initial',
+            minHeight: '100vh'
           }}
         >
           {content}
