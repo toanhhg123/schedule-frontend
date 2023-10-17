@@ -1,14 +1,10 @@
-import LayoutClient from '@/components/client/layoutClient'
+import Layout from '@/components/layout'
 
 const Team = () => {
   return (
-    <LayoutClient
-      content={
-        <>
-          <p>Team</p>
-        </>
-      }
-    />
+    <Layout>
+      <p>Team</p>
+    </Layout>
   )
 }
 
