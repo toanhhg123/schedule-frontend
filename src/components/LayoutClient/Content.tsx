@@ -78,7 +78,7 @@ const Content = ({ content }: Props) => {
             top: 0,
             left: collapsed ? 81 : 281,
             width: '100%',
-            transition: '.1s all ease'
+            transition: '.15s all ease'
           }}
         >
           <Button
