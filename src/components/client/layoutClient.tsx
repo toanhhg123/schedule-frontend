@@ -2,19 +2,50 @@ import { ReactNode, useState } from 'react'
 import {
   TeamOutlined,
   UserOutlined,
-  FundOutlined,
+  HomeOutlined,
   CarryOutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
 import { Layout, Menu, Button, theme } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   content: ReactNode
 }
 
-const Content = ({ content }: Props) => {
-  const { Header, Sider } = Layout
+type itemSidebar = {
+  key: string
+  icon: ReactNode
+  label: string
+}
+
+const Siderbars: itemSidebar[] = [
+  {
+    key: '/',
+    icon: <HomeOutlined />,
+    label: 'Home'
+  },
+  {
+    key: '/information',
+    icon: <UserOutlined />,
+    label: 'Information'
+  },
+  {
+    key: '/task',
+    icon: <CarryOutOutlined />,
+    label: 'Task'
+  },
+  {
+    key: '/team',
+    icon: <TeamOutlined />,
+    label: 'Team'
+  }
+]
+
+const LayoutClient = ({ content }: Props) => {
+  const navigate = useNavigate()
+  const { Header, Content, Sider } = Layout
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer }
@@ -38,33 +69,20 @@ const Content = ({ content }: Props) => {
         collapsible
         collapsed={collapsed}
       >
+        <img
+          src={collapsed ? '' : 'https://sinhvien.hufi.edu.vn/Content/AConfig/images/sv_logo_dashboard.png'}
+          alt=''
+          style={{ width: '100%', margin: '5px 0', objectFit: 'cover' }}
+        />
         <div className='demo-logo-vertical' />
         <Menu
           theme='light'
           mode='inline'
           defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <FundOutlined />,
-              label: 'Dashboard'
-            },
-            {
-              key: '2',
-              icon: <UserOutlined />,
-              label: 'Information'
-            },
-            {
-              key: '3',
-              icon: <CarryOutOutlined />,
-              label: 'Task'
-            },
-            {
-              key: '4',
-              icon: <TeamOutlined />,
-              label: 'Team'
-            }
-          ]}
+          items={Siderbars}
+          onClick={(e) => {
+            navigate(e.key)
+          }}
         />
       </Sider>
       <Layout>
@@ -78,7 +96,8 @@ const Content = ({ content }: Props) => {
             top: 0,
             left: collapsed ? 81 : 281,
             width: '100%',
-            transition: '.15s all ease'
+            transition: '.15s all ease',
+            zIndex: 10
           }}
         >
           <Button
@@ -91,12 +110,24 @@ const Content = ({ content }: Props) => {
               height: 64
             }}
           />
-          Header
         </Header>
-        {content}
+        <Content
+          style={{
+            padding: 0,
+            marginBottom: 16,
+            marginTop: 72,
+            marginRight: 6,
+            marginLeft: collapsed ? 82 : 282,
+            minHeight: '100vh',
+            background: colorBgContainer,
+            transition: '.15s all ease'
+          }}
+        >
+          <div style={{ padding: '4px 8px', background: colorBgContainer }}>{content}</div>
+        </Content>
       </Layout>
     </Layout>
   )
 }
 
-export default Content
+export default LayoutClient

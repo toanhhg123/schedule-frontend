@@ -1,4 +1,4 @@
-import LayoutClient from '@/components/client/layoutClient'
+import Layout from '@/components/layout'
 import { Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
@@ -34,12 +34,8 @@ const columns: ColumnsType<DataType> = [
     render: (_, { tags }) => (
       <>
         {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green'
-          if (tag === 'loser') {
-            color = 'volcano'
-          }
           return (
-            <Tag color={color} key={tag}>
+            <Tag color={'cyan'} key={tag}>
               {tag.toUpperCase()}
             </Tag>
           )
@@ -58,6 +54,19 @@ const columns: ColumnsType<DataType> = [
     )
   }
 ]
+const Plan = () => {
+  return (
+    <Layout
+      content={
+        <>
+          <Table columns={columns} dataSource={data} />
+        </>
+      }
+    />
+  )
+}
+
+export default Plan
 
 const data: DataType[] = [
   {
@@ -65,7 +74,7 @@ const data: DataType[] = [
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer', 'tester', 'value']
+    tags: ['nice', 'developer']
   },
   {
     key: '2',
@@ -82,18 +91,3 @@ const data: DataType[] = [
     tags: ['cool', 'teacher']
   }
 ]
-const Home = () => {
-  return (
-    <LayoutClient
-      content={
-        <>
-          <Table columns={columns} dataSource={data} />
-
-          <Table columns={columns} dataSource={data} />
-        </>
-      }
-    />
-  )
-}
-
-export default Home
