@@ -1,7 +1,7 @@
-import { sendRequestLogin } from '@/app/features/auth/auth.slice'
+import { resetState, sendRequestLogin } from '@/app/features/auth/auth.slice'
 import { AuthRequest } from '@/app/features/auth/auth.type'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { Button, Form, Input } from 'antd'
+import { Alert, Button, Form, Input } from 'antd'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,22 +10,23 @@ const onFinishFailed = (errorInfo: unknown) => {
 }
 
 type FieldType = {
-  username?: string
+  email?: string
   password?: string
 }
 
 const Login = () => {
   const dispatch = useAppDispatch()
-  const { status } = useAppSelector((state) => state.auth)
+  const { status, loading, error } = useAppSelector((state) => state.auth)
 
   const navigate = useNavigate()
 
-  const onFinish = (_values: AuthRequest) => {
+  const onFinish = ({ email, password }: AuthRequest) => {
     try {
+      dispatch(resetState())
       dispatch(
         sendRequestLogin({
-          email: 'admin@gmail.com',
-          password: '1234567'
+          email,
+          password
         })
       )
     } catch (error) {
@@ -50,10 +51,11 @@ const Login = () => {
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
+      {error && <Alert message={error} style={{ marginBottom: 10 }} type='error' showIcon />}
       <Form.Item<FieldType>
-        label='Username'
-        name='username'
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label='email'
+        name='email'
+        rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
       >
         <Input />
       </Form.Item>
@@ -67,7 +69,7 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type='primary' htmlType='submit'>
+        <Button loading={loading} type='primary' htmlType='submit'>
           Submit
         </Button>
       </Form.Item>

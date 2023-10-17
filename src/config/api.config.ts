@@ -27,4 +27,16 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
+API.interceptors.response.use(
+  (config) => config,
+  (error) => {
+    const message = error?.response?.data?.message || error.message
+    throw new Error(message)
+  }
+)
+
+export type ErrorAxios = {
+  message: string
+}
+
 export default API
