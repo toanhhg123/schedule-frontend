@@ -1,3 +1,5 @@
+import CompanionUnitPage from './admin/companionUnit'
+import OrganizationalUnitPage from './admin/organizationalUnit'
 import Plan from './admin/plan'
 import Home from './client/home'
 import Information from './client/information'
@@ -28,4 +30,21 @@ export const clientPages = [
   }
 ]
 
-export const adminPages = []
+export const adminPages = [
+  {
+    path: '/admin/plan',
+    element: Plan
+  },
+  {
+    path: '/admin',
+    element: Plan
+  },
+  {
+    path: '/companionUnit',
+    element: CompanionUnitPage
+  },
+  {
+    path: '/organizational',
+    element: OrganizationalUnitPage
+  }
+]
