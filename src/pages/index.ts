@@ -1,4 +1,5 @@
-import Plan from './admin/plan'
+import Category from './admin/category/category'
+import Plan from './admin/plan/plan'
 import Home from './client/home'
 import Information from './client/information'
 import Task from './client/task'
@@ -21,10 +22,14 @@ export const clientPages = [
     path: '/team',
     element: Team
   },
+  //admin
   {
-    //admin
     path: '/plan',
     element: Plan
+  },
+  {
+    path: '/category',
+    element: Category
   }
 ]
 

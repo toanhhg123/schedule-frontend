@@ -5,6 +5,7 @@ import {
   HomeOutlined,
   CarryOutOutlined,
   AuditOutlined,
+  PartitionOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
@@ -12,7 +13,7 @@ import { Layout, Menu, Button, theme } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
-  content: ReactNode
+  children: ReactNode
 }
 
 type itemSidebar = {
@@ -46,10 +47,15 @@ const Siderbars: itemSidebar[] = [
     key: '/plan',
     icon: <AuditOutlined />,
     label: 'Plan'
+  },
+  {
+    key: '/category',
+    icon: <PartitionOutlined />,
+    label: 'Category'
   }
 ]
 
-const LayoutContent = ({ content }: Props) => {
+const LayoutContent = ({ children }: Props) => {
   const navigate = useNavigate()
   const { Header, Content, Sider } = Layout
   const [collapsed, setCollapsed] = useState(false)
@@ -128,7 +134,7 @@ const LayoutContent = ({ content }: Props) => {
             transition: '.15s all ease'
           }}
         >
-          <div style={{ padding: '4px 8px', background: colorBgContainer }}>{content}</div>
+          <div style={{ padding: '4px 8px', background: colorBgContainer }}>{children}</div>
         </Content>
       </Layout>
     </Layout>

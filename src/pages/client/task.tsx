@@ -1,14 +1,10 @@
-import LayoutClient from '@/components/client/layoutClient'
+import Layout from '@/components/layout'
 
 const Task = () => {
   return (
-    <LayoutClient
-      content={
-        <>
-          <p>Task</p>
-        </>
-      }
-    />
+    <Layout>
+      <p>Task</p>
+    </Layout>
   )
 }
 

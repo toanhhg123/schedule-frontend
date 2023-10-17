@@ -1,4 +1,4 @@
-import LayoutClient from '@/components/client/layoutClient'
+import Layout from '@/components/layout'
 import { Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
@@ -84,15 +84,11 @@ const data: DataType[] = [
 ]
 const Home = () => {
   return (
-    <LayoutClient
-      content={
-        <>
-          <Table columns={columns} dataSource={data} />
+    <Layout>
+      <Table columns={columns} dataSource={data} />
 
-          <Table columns={columns} dataSource={data} />
-        </>
-      }
-    />
+      <Table columns={columns} dataSource={data} />
+    </Layout>
   )
 }
 
