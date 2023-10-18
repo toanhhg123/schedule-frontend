@@ -1,15 +1,15 @@
-import { ReactNode, useState } from 'react'
+import { logout } from '@/app/features/auth/auth.slice'
+import { useAppDispatch } from '@/app/hooks'
 import {
-  TeamOutlined,
-  UserOutlined,
-  HomeOutlined,
-  CarryOutOutlined,
   AuditOutlined,
-  PartitionOutlined,
+  HomeOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  PartitionOutlined,
+  TeamOutlined
 } from '@ant-design/icons'
-import { Layout, Menu, Button, theme } from 'antd'
+import { Button, Layout, Menu, theme } from 'antd'
+import { ReactNode, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
@@ -28,20 +28,11 @@ const Siderbars: itemSidebar[] = [
     icon: <HomeOutlined />,
     label: 'Home'
   },
+
   {
-    key: '/information',
-    icon: <UserOutlined />,
-    label: 'Information'
-  },
-  {
-    key: '/task',
-    icon: <CarryOutOutlined />,
-    label: 'Task'
-  },
-  {
-    key: '/team',
+    key: '/companionUnit',
     icon: <TeamOutlined />,
-    label: 'Team'
+    label: 'companionUnit'
   },
   {
     key: '/plan',
@@ -49,9 +40,9 @@ const Siderbars: itemSidebar[] = [
     label: 'Plan'
   },
   {
-    key: '/category',
+    key: '/organizational',
     icon: <PartitionOutlined />,
-    label: 'Category'
+    label: 'organizational'
   }
 ]
 
@@ -59,6 +50,7 @@ const LayoutContent = ({ children }: Props) => {
   const navigate = useNavigate()
   const { Header, Content, Sider } = Layout
   const [collapsed, setCollapsed] = useState(false)
+  const dispatch = useAppDispatch()
   const {
     token: { colorBgContainer }
   } = theme.useToken()
@@ -96,6 +88,9 @@ const LayoutContent = ({ children }: Props) => {
             navigate(e.key)
           }}
         />
+        <Button danger style={{ marginLeft: 20 }} onClick={() => dispatch(logout())}>
+          logout
+        </Button>
       </Sider>
       <Layout>
         <Header

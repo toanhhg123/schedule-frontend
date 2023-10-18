@@ -77,37 +77,33 @@ const CompanionUnitPage = () => {
   ]
 
   return (
-    <Layout
-      content={
-        <>
-          <Modal onOk={handleOk} open={show.type ? true : false} onCancel={() => setShow({})}>
-            <Form form={form} name='basic' initialValues={{ remember: true }} autoComplete='off'>
-              <Form.Item<CompanionUnitCreate>
-                label='name'
-                name='name'
-                rules={[{ required: true, message: 'Please input your name!' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Form>
-          </Modal>
-          <Button
-            type='primary'
-            onClick={() => {
-              setShow({
-                type: 'create'
-              })
-              form.setFieldsValue({
-                name: ''
-              })
-            }}
+    <Layout>
+      <Modal onOk={handleOk} open={show.type ? true : false} onCancel={() => setShow({})}>
+        <Form form={form} name='basic' initialValues={{ remember: true }} autoComplete='off'>
+          <Form.Item<CompanionUnitCreate>
+            label='name'
+            name='name'
+            rules={[{ required: true, message: 'Please input your name!' }]}
           >
-            create
-          </Button>
-          <Table rowKey={'_id'} key={'_id'} columns={columns} dataSource={data} loading={loading} />
-        </>
-      }
-    />
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Button
+        type='primary'
+        onClick={() => {
+          setShow({
+            type: 'create'
+          })
+          form.setFieldsValue({
+            name: ''
+          })
+        }}
+      >
+        create
+      </Button>
+      <Table rowKey={'_id'} key={'_id'} columns={columns} dataSource={data} loading={loading} />
+    </Layout>
   )
 }
 
